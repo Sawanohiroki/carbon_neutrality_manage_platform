@@ -17,10 +17,12 @@ public class MainFilter extends HttpFilter {
     @Override
     protected void doFilter(HttpServletRequest req, HttpServletResponse res, FilterChain chain) throws IOException, ServletException {
         String url = req.getRequestURL().toString();
-        if(!url.contains("/static/") && !url.endsWith("login") && !url.endsWith("register") && !url.endsWith("index")){
+        if(!url.contains("/static/") && !url.endsWith("login") && !url.endsWith("register") && !url.endsWith("indexgovernment") && !url.endsWith("index")){
             HttpSession session = req.getSession();
-            User user  = (User) session.getAttribute("user");
+            Object user  = session.getAttribute("user");
+         //   System.out.println("in Filter");
             if(user == null) {
+              //  System.out.println("bu cheng gong");
                 res.sendRedirect("login");
                 return;
             }

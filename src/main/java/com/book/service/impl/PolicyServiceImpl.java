@@ -59,13 +59,13 @@ public class PolicyServiceImpl implements PolicyService {
 //        }
 //    }
 //
-//    @Override
-//    public void addBorrow(int sid, int bid) {
-//        try (SqlSession sqlSession = MybatisUtil.getSession()){
-//            BookMapper mapper = sqlSession.getMapper(BookMapper.class);
-//            mapper.addBorrow(sid, bid);
-//        }
-//    }
+    @Override
+    public void insertPolicy(String name, String scope1, String scope2, String scope3, String description, Date date) {
+        try (SqlSession sqlSession = MybatisUtil.getSession()){
+            PolicyMapper mapper = sqlSession.getMapper(PolicyMapper.class);
+            mapper.insertPolicy(name, scope1, scope2, scope3, description, date);
+        }
+    }
 //
 //    @Override
 //    public void deleteBook(int bid) {

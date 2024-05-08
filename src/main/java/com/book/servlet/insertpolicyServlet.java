@@ -1,7 +1,7 @@
-package com.book.servlet.manage;
+package com.book.servlet;
 
-import com.book.service.BookService;
-import com.book.service.impl.BookServiceImpl;
+import com.book.service.PolicyService;
+import com.book.service.impl.PolicyServiceImpl;
 import com.book.utils.ThymeleafUtil;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -11,28 +11,32 @@ import jakarta.servlet.http.HttpServletResponse;
 import org.thymeleaf.context.Context;
 
 import java.io.IOException;
+import java.util.Date;
 
 @WebServlet("/add-book")
-public class AddBookServlet extends HttpServlet {
+public class insertpolicyServlet extends HttpServlet {
 
-    BookService service;
+    PolicyService service;
     @Override
     public void init() throws ServletException {
-        service = new BookServiceImpl();
+        service = new PolicyServiceImpl();
     }
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        ThymeleafUtil.process("insertpolicy.html", new Context(), resp.getWriter());
+        ThymeleafUtil.process("add-book.html", new Context(), resp.getWriter());
     }
 
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        String title = req.getParameter("title");
-        String desc = req.getParameter("desc");
-        double price = Double.parseDouble(req.getParameter("price"));
-        service.addBook(title, desc, price);
+        String name = req.getParameter("name");
+        String scope1 = req.getParameter("scope1");
+        String scope2 = req.getParameter("scope2");
+        String scope3 = req.getParameter("scope3");
+        String desc = req.getParameter("description");
+        Date date = new Date();
+        service.insertPolicy(name, scope1, scope2, scope3, desc, date);
         resp.sendRedirect("books");
     }
 }
