@@ -59,7 +59,7 @@ public class LoginServlet extends HttpServlet {
             return;
         }
         if(req.getSession().getAttribute("government") != null) {
-            resp.sendRedirect("index2");
+            resp.sendRedirect("indexgovernment");
             return;
         }
         ThymeleafUtil.process("login.html", context, resp.getWriter());
@@ -87,9 +87,9 @@ public class LoginServlet extends HttpServlet {
                     resp.addCookie(cookie_password);
                 }
                 System.out.println("xixi");
-                resp.sendRedirect("index2");
+                req.getSession().setAttribute("user", "government");
+                resp.sendRedirect("indexgovernment");
             } else {
-
                 req.getSession().setAttribute("login-failure", new Object());
                 this.doGet(req, resp);
             }
@@ -104,6 +104,7 @@ public class LoginServlet extends HttpServlet {
                     resp.addCookie(cookie_username);
                     resp.addCookie(cookie_password);
                 }
+                req.getSession().setAttribute("user", "enterprise");
                 resp.sendRedirect("index");
             } else {
                 req.getSession().setAttribute("login-failure", new Object());
